@@ -1,0 +1,42 @@
+home:
+  rooms:
+    Living:
+      surfaces:
+        - shelving_unit:
+            methods:
+              - "wipe"
+              - "wet wipe"
+        - bed:
+            methods:
+              - "make"
+              - "wipe"
+        - desk:
+            methods:
+              - "wipe"
+              - "wet wipe"
+              - "tidy up"
+    Kitchen:
+      surfaces:
+        - cupboard:
+            methods:
+              - "tidy up"
+              - "wet wipe"
+        - table:
+            methods:
+              - "tidy up"
+              - "wet wipe"
+  appliances:
+    Refrigerator:
+      methods:
+        - "wet wipe"
+        - "tidy up"
+        - "sort"
+    Stove/Oven:
+      methods:
+        - "clean"
+    Dishwasher:
+      methods:
+        - "refill"
+        - "wash up"
+    Microwave:
+      - "wipe"

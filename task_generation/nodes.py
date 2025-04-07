@@ -9,7 +9,6 @@ from .state import TaskState
 ###############################################################################
 # Nodes
 
-
 #######################################
 # Generation
 
@@ -28,6 +27,7 @@ def repair(state : TaskState):
 def storage(state : TaskState):
     """Store the task in ChromaDB"""
     return {"success" : True}
+
 
 #######################################
 # Checks
