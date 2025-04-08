@@ -2,26 +2,26 @@ home:
   rooms:
     Living:
       surfaces:
-        - shelving_unit:
-            methods:
-              - "wipe"
-              - "wet wipe"
-        - bed:
-            methods:
-              - "make"
-              - "wipe"
-        - desk:
-            methods:
-              - "wipe"
-              - "wet wipe"
-              - "tidy up"
+        shelving_unit:
+          methods:
+            - "wipe"
+            - "wet wipe"
+        bed:
+          methods:
+            - "make"
+            - "wipe"
+        desk:
+          methods:
+            - "wipe"
+            - "wet wipe"
+            - "tidy up"
     Kitchen:
       surfaces:
-        - cupboard:
+        cupboard:
             methods:
               - "tidy up"
               - "wet wipe"
-        - table:
+        table:
             methods:
               - "tidy up"
               - "wet wipe"
@@ -39,4 +39,5 @@ home:
         - "refill"
         - "wash up"
     Microwave:
-      - "wipe"
+      methods:
+        - "wipe"

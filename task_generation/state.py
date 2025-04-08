@@ -11,8 +11,12 @@ from typing_extensions import TypedDict
 
 class TaskState(TypedDict):
     """States for task generation"""
+    home: dict
     history: list
-    room: str
+    target: str
+    surface: str
+    method : str
+    kind : str
     difficulty: int
     category: str
     discription: str

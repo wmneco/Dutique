@@ -1,10 +1,32 @@
 """Dutique generates small household tasks"""
 
+###############################################################################
+# Imports
+
+import logging
+
 import yaml
 
 import task_generation
 
+
+###############################################################################
+# Implementation
+
+#######################################
+# main
+
+logger = logging.getLogger('task_generation.nodes')
+logger.setLevel(logging.DEBUG)
+
+logging.basicConfig(
+    level=logging.WARNING,  # Default auf WARNING
+    format='[%(name)s] %(levelname)s: %(message)s',
+)
+
+#######################################
 # Read room config
+
 def read_config(filename : str) -> dict:
     """Read yaml config"""
     data : dict = {}
@@ -12,17 +34,13 @@ def read_config(filename : str) -> dict:
         data = yaml.safe_load(file)
     return data
 
-config = read_config("config.yaml")
-for room in config["home"]["rooms"]:
-    print("Room:", room)
 
-task = task_generation.task_graph.invoke({
-    "history": [],
-    "room": "",
-    "difficulty": "",
-    "category": "",
-    "discription": "",
-    "success": False
-})
+#######################################
+# main
 
-print(task)
+if __name__ == "__main__":
+    config = read_config("config.yaml")
+
+    task = task_generation.task_graph.invoke({
+        "home": config["home"]
+    })
