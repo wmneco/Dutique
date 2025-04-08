@@ -4,6 +4,7 @@
 # Imports
 
 from langgraph.graph import START, END, StateGraph
+from langgraph.pregel import RetryPolicy
 
 from .state import TaskState
 from .nodes import (
@@ -26,7 +27,7 @@ task_graph_builder = StateGraph(state_schema=TaskState)
 
 task_graph_builder.add_node(task_generation)
 task_graph_builder.add_node(description_generation)
-task_graph_builder.add_node(quality_check)
+task_graph_builder.add_node(quality_check, retry=RetryPolicy(max_attempts=5))
 task_graph_builder.add_node(repair)
 task_graph_builder.add_node(storage)
 
@@ -38,13 +39,13 @@ task_graph_builder.add_edge("task_generation", "description_generation")
 task_graph_builder.add_conditional_edges(
     "description_generation",
     quality_check,
-    {"Retry": "repair", "Pass": "storage", "Fail": END},
+    {"retry": "repair", "pass": "storage", "fail": END},
 )
 
 task_graph_builder.add_conditional_edges(
     "repair",
     quality_check,
-    {"Retry": "repair", "Pass": "storage", "Fail": END},
+    {"retry": "repair", "pass": "storage", "fail": END},
 )
 
 task_graph_builder.add_edge("description_generation", END)
