@@ -5,8 +5,6 @@
 
 from logging import Logger
 
-import colorama
-
 from .state import TaskState
 
 
@@ -15,12 +13,39 @@ from .state import TaskState
 
 def log_task(state : TaskState, logger : Logger) -> None:
     """Log the output of the Task function"""
-    logger.info(
-        state["kind"]
-        + "-->"
+    logger.debug(
+        "TASK: "
+        +state["kind"]
+        + "->"
         + state["target"]
-        + "-->"
-        + (state["surface"] if state["kind"] == "room" else "")
-        + ": TASK: "
+        + "->"
+        + (state["surface"] + "->" if state["kind"] == "rooms" else "")
         + state["method"]
+    )
+
+def log_description (state : TaskState, logger : Logger) -> None:
+    """Log the task description"""
+    logger.debug(
+        "DESCRIPTION: "
+        +state["description"]
+    )
+
+def log_repair (state : TaskState, logger : Logger) -> None:
+    """Log the task description"""
+    logger.debug(
+        "REPAIRED: "
+        +state["description"]
+    )
+
+def log_check (result ,logger : Logger) -> None:
+    """Log the check result"""
+    logger.debug(
+        "CHECK: "
+        +result
+    )
+
+def log_check_error(logger : Logger) -> None:
+    """Log if a task finally gets aborted"""
+    logger.warning(
+        "TASK FAIL"
     )

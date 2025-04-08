@@ -47,13 +47,14 @@ flowchart LR
 ## 🛠️ Get Started
 To get Dutique up and running, please install the following software:
 
-Ollama
-Docker & Docker Compose
+- Ollama
+- Docker & Docker Compose
+
 Then run:
 
 ```bash
 # Download LLM Modell
-ollama pull gemma3:1b
+ollama pull llama3.2:latest
 
 # Clone the repo
 git clone https://github.com/wmneco/Dutique

@@ -17,7 +17,8 @@ class TaskState(TypedDict):
     surface: str
     method : str
     kind : str
+    trys: int
     difficulty: int
     category: str
-    discription: str
+    description: str
     success: bool
