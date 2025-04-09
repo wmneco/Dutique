@@ -7,12 +7,13 @@ import logging
 
 import yaml
 from colorama import Fore, Style
+import chromadb
 
 import task_generation
 
 
 ###############################################################################
-# Implementation
+# Init
 
 #######################################
 # Logging Config
@@ -59,6 +60,25 @@ def read_config(filename : str) -> dict:
 
 
 #######################################
+# ChromaDB
+
+chroma_client = chromadb.Client()
+task_collection = chroma_client.create_collection(name="task_collection")
+
+
+###############################################################################
+# Helper functions
+
+def query_tasks(query : str) -> None:
+    """Query the task collection with a search string"""
+    result = task_collection.query(
+        query_texts=[query],
+        n_results=1,
+    )
+
+    logger.info("QUERY: %s", result["documents"][0][0])
+
+###############################################################################
 # main
 
 if __name__ == "__main__":
@@ -66,7 +86,12 @@ if __name__ == "__main__":
 
     for x in range (10):
         task = task_generation.task_graph.invoke({
-            "home": config["home"]
+            "home": config["home"],
+            "collection" : task_collection
         })
 
-        logger.info("TASK: %s\n", task["description"])
+        logger.info("TASK: %s", task["description"])
+
+    # Some testing
+    query_tasks("easy")
+    query_tasks("difficult")

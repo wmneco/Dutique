@@ -4,6 +4,7 @@
 # Imports
 
 from typing_extensions import TypedDict
+from chromadb import Collection
 
 
 ###############################################################################
@@ -22,3 +23,5 @@ class TaskState(TypedDict):
     category: str
     description: str
     success: bool
+    collection: Collection
+    uuid: str
