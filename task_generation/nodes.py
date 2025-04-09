@@ -6,6 +6,7 @@
 import random
 import logging
 import uuid
+from datetime import datetime
 
 from langchain_ollama import ChatOllama
 
@@ -129,9 +130,14 @@ def storage(state : TaskState):
         documents=[
             state["description"]
         ],
-        # metadatas= [
+         metadatas= [{
+            "created": str(datetime.now()),
+            "kind" : state["kind"],
+            "room": state['target'],
+            "surface": state["surface"] if "surface" in state else "",
+            "task": state["method"]
 
-        # ],
+        }],
         ids=[state["uuid"]],
     )
 

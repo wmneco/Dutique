@@ -24,7 +24,7 @@ class LogFormatter(logging.Formatter):
 
     FORMATS = {
         logging.DEBUG: format_template,
-        logging.INFO: format_template,
+        logging.INFO: Fore.BLUE + format_template + Style.RESET_ALL,
         logging.WARNING: Fore.YELLOW + format_template + Style.RESET_ALL,
         logging.ERROR: Fore.RED + format_template + Style.RESET_ALL,
         logging.CRITICAL: Fore.LIGHTRED_EX + format_template + Style.RESET_ALL
@@ -37,12 +37,12 @@ class LogFormatter(logging.Formatter):
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 task_generation_logger = logging.getLogger("task_generation")
 
 stream = logging.StreamHandler()
-stream.setLevel(logging.INFO)
+stream.setLevel(logging.DEBUG)
 stream.setFormatter(LogFormatter())
 
 logger.addHandler(stream)
@@ -90,7 +90,7 @@ if __name__ == "__main__":
             "collection" : task_collection
         })
 
-        logger.info("TASK: %s", task["description"])
+        logger.debug("TASK: %s", task["description"])
 
     # Some testing
     query_tasks("easy")
