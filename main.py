@@ -62,8 +62,8 @@ def read_config(filename : str) -> dict:
 #######################################
 # ChromaDB
 
-chroma_client = chromadb.Client()
-task_collection = chroma_client.create_collection(name="task_collection")
+chroma_client = chromadb.HttpClient(host='chromadb', port=8000)
+task_collection = chroma_client.get_or_create_collection(name="task_collection")
 
 
 ###############################################################################

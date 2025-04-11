@@ -37,6 +37,7 @@ logger = logging.getLogger(__name__)
 llm = ChatOllama(
     model="llama3.2:latest",
     configurable_fields=("temperature","seed"),
+    base_url="host.docker.internal:11434",
 )
 
 #######################################
