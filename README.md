@@ -48,7 +48,7 @@ flowchart LR
 To get Dutique up and running, please install the following software:
 
 - Ollama
-    Ensure that Ollama is properly configured and reachable from outside. For more information on configuring Ollama, refer to the [Ollama FAQ](https://github.com/ollama/ollama/blob/main/docs/faq.md).
+    - Ensure that Ollama is properly configured and reachable from outside. For more information on configuring Ollama, refer to the [Ollama FAQ](https://github.com/ollama/ollama/blob/main/docs/faq.md).
 - Docker & Docker Compose
 
 Then run:
