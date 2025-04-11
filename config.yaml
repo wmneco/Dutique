@@ -3,41 +3,59 @@ home:
     Living:
       surfaces:
         shelving_unit:
-          methods:
-            - "wipe"
-            - "wet wipe"
+          tasks:
+            - method: "wipe"
+              frequency: "weekly"
+            - method: "wet wipe"
+              frequency: "monthly"
         bed:
-          methods:
-            - "make"
-            - "wipe"
+          tasks:
+            - method: "make"
+              frequency: "daily"
+            - method: "wipe"
+              frequency: "weekly"
         desk:
-          methods:
-            - "wipe"
-            - "wet wipe"
-            - "tidy up"
+          tasks:
+            - method: "wipe"
+              frequency: "weekly"
+            - method: "wet wipe"
+              frequency: "monthly"
+            - method: "tidy up"
+              frequency: "daily"
     Kitchen:
       surfaces:
         cupboard:
-            methods:
-              - "tidy up"
-              - "wet wipe"
+          tasks:
+            - method: "tidy up"
+              frequency: "weekly"
+            - method: "wet wipe"
+              frequency: "weekly"
         table:
-            methods:
-              - "tidy up"
-              - "wet wipe"
+          tasks:
+            - method: "tidy up"
+              frequency: "daily"
+            - method: "wet wipe"
+              frequency: "daily"
   appliances:
     Refrigerator:
-      methods:
-        - "wet wipe"
-        - "tidy up"
-        - "sort"
+      tasks:
+        - method: "wet wipe"
+          frequency: "weekly"
+        - method: "tidy up"
+          frequency: "weekly"
+        - method: "sort"
+          frequency: "weekly"
     Stove/Oven:
-      methods:
-        - "clean"
+      tasks:
+        - method: "clean"
+          frequency: "weekly"
     Dishwasher:
-      methods:
-        - "refill"
-        - "wash up"
+      tasks:
+        - method: "refill"
+          frequency: "weekly"
+        - method: "wash up"
+          frequency: "after use"
     Microwave:
-      methods:
-        - "wipe"
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
