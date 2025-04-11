@@ -20,4 +20,3 @@ COPY . .
 
 # Run the command to start the app
 ENTRYPOINT ["python", "main.py"]
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
