@@ -6,6 +6,7 @@
 import random
 import logging
 import uuid
+from datetime import datetime
 
 from langchain_ollama import ChatOllama
 
@@ -68,8 +69,9 @@ def task_generation(state : TaskState):
 def description_generation(state : TaskState):
     """LLM creates descriptions based on generated task parameters"""
 
-    # Init trys
+    # Init
     state["trys"] = 0
+    state["uuid"] = str(uuid.uuid4())
 
     if state["kind"] == "rooms":
         prompt = description_room_task.invoke(
@@ -88,7 +90,7 @@ def description_generation(state : TaskState):
         )
 
     state["description"] = llm.with_config(
-        {"temperature": 1, "seed": uuid.uuid4}).invoke(prompt).content.rstrip()
+        {"temperature": 1, "seed": state["uuid"]}).invoke(prompt).content.rstrip()
 
     log_description(state, logger)
 
@@ -124,6 +126,21 @@ def repair(state : TaskState):
 
 def storage(state : TaskState):
     """Store the task in ChromaDB"""
+    state["collection"].add(
+        documents=[
+            state["description"]
+        ],
+         metadatas= [{
+            "created": str(datetime.now()),
+            "kind" : state["kind"],
+            "room": state['target'],
+            "surface": state["surface"] if "surface" in state else "",
+            "task": state["method"]
+
+        }],
+        ids=[state["uuid"]],
+    )
+
     return {"success" : True}
 
 
