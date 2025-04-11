@@ -50,6 +50,11 @@ def random_key (dictornary : dict) -> str:
 def task_generation(state : TaskState):
     """Initial task parameter creation"""
 
+    # Init
+    state["trys"] = 0
+    state["uuid"] = str(uuid.uuid4())
+    state["success"] = False
+
     home = state["home"]
     state["kind"] = random_key(home)
 
@@ -69,10 +74,6 @@ def task_generation(state : TaskState):
 
 def description_generation(state : TaskState):
     """LLM creates descriptions based on generated task parameters"""
-
-    # Init
-    state["trys"] = 0
-    state["uuid"] = str(uuid.uuid4())
 
     if state["kind"] == "rooms":
         prompt = description_room_task.invoke(
