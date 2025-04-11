@@ -13,14 +13,11 @@ from chromadb import Collection
 class TaskState(TypedDict):
     """States for task generation"""
     home: dict
-    history: list
     target: str
     surface: str
     method : str
     kind : str
     trys: int
-    difficulty: int
-    category: str
     description: str
     success: bool
     collection: Collection

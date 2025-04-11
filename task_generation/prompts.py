@@ -34,20 +34,20 @@ IMPORTANT:
 
 EXAMPLES:
 
-Appliance: Blender  
-Task: Make smoothie  
+Appliance: Blender
+Task: Make smoothie
 Output: Turn your kitchen into a tropical rave—summon the blender and let the fruit dance begin! 🍌🍓
 
-Appliance: Oven  
-Task: Bake chocolate cake  
+Appliance: Oven
+Task: Bake chocolate cake
 Output: It’s time to unleash sweet lava magic—ignite the oven and summon the chocolate volcano! 🌋🍫
 
-Appliance: Washing machine  
-Task: Wash gym clothes  
+Appliance: Washing machine
+Task: Wash gym clothes
 Output: Your sweaty socks crave redemption—spin them into fresh-smelling warriors of cleanliness! 🧼💪
 
-Appliance: Coffee machine  
-Task: Brew double espresso  
+Appliance: Coffee machine
+Task: Brew double espresso
 Output: Summon the bean wizard. Today demands double strength and zero mercy. ☕⚔️
 
 NOW IT'S YOUR TURN.
@@ -79,29 +79,29 @@ STRICT RULES — All must be followed:
 
 EXAMPLES:
 
-Room: Kitchen  
-Surface: Countertop  
-Task: Wipe down  
+Room: Kitchen
+Surface: Countertop
+Task: Wipe down
 Output: Make that kitchen countertop shine like it’s starring in a cooking show finale! ✨🍽️
 
-Room: Bathroom  
-Surface: Mirror  
-Task: Polish  
+Room: Bathroom
+Surface: Mirror
+Task: Polish
 Output: Polish that mirror until it gasps and says, “Is that a Greek god in my reflection?” 😎🪞
 
-Room: Living room  
-Surface: Coffee table  
-Task: Dust  
+Room: Living room
+Surface: Coffee table
+Task: Dust
 Output: Time to evict the dust bunnies squatting on the coffee table—show no mercy! 🧹🐰
 
-Room: Bedroom  
-Surface: Nightstand  
-Task: Wipe down  
+Room: Bedroom
+Surface: Nightstand
+Task: Wipe down
 Output: Wipe those tea rings away—your nightstand serves royalty. 👑🌙
 
-Room: Hallway  
-Surface: Baseboards  
-Task: Clean  
+Room: Hallway
+Surface: Baseboards
+Task: Clean
 Output: Get down low and bring justice to the forgotten baseboards of the hallway realm! ⚔️🧼
 
 
@@ -186,10 +186,10 @@ RULES . The description must follow ALL 5 rules:
 3. ⚠️ It should short — maximum 60 tokens.
 
 EVALUATE:
-If ALL rules are followed → respond with exactly: pass  
+If ALL rules are followed → respond with exactly: pass
 If ANY rule is clearly broken → respond with exactly: retry
 
-Important: Respond with **only one word**: pass OR retry  
+Important: Respond with **only one word**: pass OR retry
 Do NOT add any other text. Do NOT explain. Do NOT add a newline.
 '''
 )
@@ -211,10 +211,10 @@ RULES - The description must follow ALL 5 rules:
 3. ⚠️ It should short — maximum 60 tokens.
 
 EVALUATE:
-If ALL rules are followed → respond with exactly: pass  
+If ALL rules are followed → respond with exactly: pass
 If ANY rule is clearly broken → respond with exactly: retry
 
-Important: Respond with **only one word**: pass OR retry  
+Important: Respond with **only one word**: pass OR retry
 Do NOT add any other text. Do NOT explain. Do NOT add a newline.
 '''
 )
