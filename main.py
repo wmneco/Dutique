@@ -76,7 +76,7 @@ def query_tasks(query : str) -> None:
         n_results=1,
     )
 
-    logger.info("QUERY: %s", result["documents"][0][0])
+    logger.info("QUERY: %s %s", result["documents"][0][0], result["metadatas"][0][0])
 
 ###############################################################################
 # main
@@ -94,4 +94,4 @@ if __name__ == "__main__":
 
     # Some testing
     query_tasks("easy")
-    query_tasks("difficult")
+    query_tasks("Kitchen")
