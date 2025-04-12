@@ -12,15 +12,12 @@ from langchain_ollama import ChatOllama
 
 from .state import TaskState
 from .prompts import (
-    description_appliance_task,
-    description_room_task,
-    check_room_task_description,
-    check_appliance_description,
-    repair_room_task_description,
-    repair_appliance_task_description
+    description_task,
+    check_description,
+    repair_task_description
 )
 
-from .log import log_task, log_description, log_check, log_repair
+from .log import log_description, log_check, log_repair
 
 ###############################################################################
 # Nodes
@@ -35,7 +32,7 @@ logger = logging.getLogger(__name__)
 # Load LLM
 
 llm = ChatOllama(
-    model="llama3.2:latest",
+    model="llama3.2:1b",
     configurable_fields=("temperature","seed"),
     base_url="host.docker.internal:11434",
 )
@@ -49,50 +46,35 @@ def random_key (dictornary : dict) -> str:
 
 def task_generation(state : TaskState):
     """Initial task parameter creation"""
-
-    # Init
-    state["trys"] = 0
-    state["uuid"] = str(uuid.uuid4())
-    state["success"] = False
-
     home = state["home"]
-    state["kind"] = random_key(home)
+    kind = random_key(home)
+    target = random_key(home[kind])
+    method = random_key(home[kind][target]["tasks"])["method"]
+    room = home[kind][target]["room"]
 
-    if state["kind"]  == "rooms":
-        state["target"] = random_key(home[state["kind"]])
-        state["surface"] = random_key(home[state["kind"]][state["target"]]["surfaces"])
-        state["method"] = random.choice(
-            home[state["kind"]][state["target"]]["surfaces"][state["surface"]]["methods"]
-        )
-    else:
-        state["target"] = random_key(home[state["kind"]])
-        state["method"] = random_key(home[state["kind"]][state["target"]]["methods"])
-
-    log_task(state, logger)
-
-    return state
+    return {
+        "trys": 0,
+        "uuid": str(uuid.uuid4()),
+        "success": False,
+        "kind":kind,
+        "target":target,
+        "method": method,
+        "room": room
+    }
 
 def description_generation(state : TaskState):
     """LLM creates descriptions based on generated task parameters"""
 
-    if state["kind"] == "rooms":
-        prompt = description_room_task.invoke(
-            {
-                "room": state['target'],
-                "surface": state["surface"],
-                "task": state["method"]
-            }
-        )
-    else:
-        prompt = description_appliance_task.invoke(
-            {
-                "appliance": state['target'],
-                "task": state["method"]
-            }
-        )
+    prompt = description_task.invoke({
+        "room": state['target'],
+        "target": state['kind'].capitalize() + ": " + state['target'],
+        "task": state["method"],
+    })
 
-    state["description"] = llm.with_config(
-        {"temperature": 1, "seed": state["uuid"]}).invoke(prompt).content.rstrip()
+    state["description"] = llm.with_config({
+        "temperature": 1.5,
+        "seed": state["uuid"]
+    }).invoke(prompt).content.rstrip()
 
     log_description(state, logger)
 
@@ -101,23 +83,11 @@ def description_generation(state : TaskState):
 def repair(state : TaskState):
     """Repair Tasks that fail quality checks with an LLM to improve the task"""
 
-    if state["kind"] == "rooms":
-        prompt = repair_room_task_description.invoke(
-            {
-                "description": state["description"],
-                "room": state['target'],
-                "surface": state["surface"],
-                "task": state["method"]
-            }
-        )
-    else:
-        prompt = repair_appliance_task_description.invoke(
-            {
-                "description": state["description"],
-                "appliance": state['target'],
-                "task": state["method"]
-            }
-        )
+    prompt = repair_task_description.invoke({
+        "room": state['target'],
+        "target": state['kind'].capitalize() + ": " + state['target'],
+        "task": state["method"],
+    })
 
     state["description"] = llm.invoke(prompt).content.rstrip()
     log_repair(state, logger)
@@ -155,23 +125,12 @@ def quality_check(state : TaskState):
     if state["trys"] > 5:
         return "fail"
 
-    if state["kind"] == "rooms":
-        prompt = check_room_task_description.invoke(
-            {
-                "description": state["description"],
-                "room": state['target'],
-                "surface": state["surface"],
-                "task": state["method"]
-            }
-        )
-    else:
-        prompt = check_appliance_description.invoke(
-            {
-                "description": state["description"],
-                "appliance": state['target'],
-                "task": state["method"]
-            }
-        )
+    prompt = check_description.invoke({
+        "description": state["description"],
+        "target": state['kind'].capitalize() + ": " + state['target'],
+        "room" : state["room"],
+        "task": state["method"]
+    })
 
     result = llm.invoke(prompt).content.casefold().rstrip()
     log_check(result, logger)

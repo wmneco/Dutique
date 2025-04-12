@@ -14,7 +14,7 @@ class TaskState(TypedDict):
     """States for task generation"""
     home: dict
     target: str
-    surface: str
+    room: str
     method : str
     kind : str
     trys: int

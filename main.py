@@ -40,6 +40,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 task_generation_logger = logging.getLogger("task_generation")
+task_generation_logger.setLevel(logging.DEBUG)
 
 stream = logging.StreamHandler()
 stream.setLevel(logging.DEBUG)

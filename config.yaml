@@ -1,41 +1,43 @@
 home:
-  rooms:
-    Living:
-      surfaces:
-        shelving_unit:
-          tasks:
-            - method: "wipe"
-              frequency: "weekly"
-            - method: "wet wipe"
-              frequency: "monthly"
-        bed:
-          tasks:
-            - method: "make"
-              frequency: "daily"
-            - method: "wipe"
-              frequency: "weekly"
-        desk:
-          tasks:
-            - method: "wipe"
-              frequency: "weekly"
-            - method: "wet wipe"
-              frequency: "monthly"
-            - method: "tidy up"
-              frequency: "daily"
-    Kitchen:
-      surfaces:
-        cupboard:
-          tasks:
-            - method: "tidy up"
-              frequency: "weekly"
-            - method: "wet wipe"
-              frequency: "weekly"
-        table:
-          tasks:
-            - method: "tidy up"
-              frequency: "daily"
-            - method: "wet wipe"
-              frequency: "daily"
+  furniture:
+    Shelve:
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "monthly"
+      room: "Living"
+    bed:
+      tasks:
+        - method: "make"
+          frequency: "daily"
+        - method: "wipe"
+          frequency: "weekly"
+      room: "Living"
+    desk:
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "monthly"
+        - method: "tidy up"
+          frequency: "daily"
+      room: "Living"
+    cupboard:
+      tasks:
+        - method: "tidy up"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "weekly"
+      room: "Kitchen"
+    table:
+      tasks:
+        - method: "tidy up"
+          frequency: "daily"
+        - method: "wet wipe"
+          frequency: "daily"
+      room: "Kitchen"
+
   appliances:
     Refrigerator:
       tasks:
@@ -45,17 +47,21 @@ home:
           frequency: "weekly"
         - method: "sort"
           frequency: "weekly"
+      room: "Kitchen"
     Stove/Oven:
       tasks:
         - method: "clean"
           frequency: "weekly"
+      room: "Kitchen"
     Dishwasher:
       tasks:
         - method: "refill"
           frequency: "weekly"
         - method: "wash up"
           frequency: "after use"
+      room: "Kitchen"
     Microwave:
       tasks:
         - method: "wipe"
           frequency: "weekly"
+      room: "Kitchen"
