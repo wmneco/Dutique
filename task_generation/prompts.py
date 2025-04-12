@@ -13,6 +13,7 @@ description_task = PromptTemplate.from_template(
 '''You must write a short, funny, motivating, and creative description for a task.
 INPUT:
 Room: {room}
+Frequency: {frequency}
 {target}
 Task: {task}
 
@@ -77,6 +78,7 @@ repair_task_description = PromptTemplate.from_template(
 
 INPUT:
 Room: {room}
+Frequency: {frequency}
 {target}
 Task: {task}
 Broken Description: {description}
@@ -96,6 +98,28 @@ IMPORTANT:
 - Do NOT write things like “Here is the fixed version:”
 - Just output the repaired description — nothing else.
 
+EXAMPLES FOR GOOD DESCRIPTIONS:
+
+Room: Kitchen
+Appliance: Oven
+Task: Bake chocolate cake
+Output: It’s time to unleash sweet lava magic—ignite the oven and summon the chocolate volcano! 🌋🍫
+
+Room: Kitchen
+Appliance: Washing machine
+Task: Wash gym clothes
+Output: Your sweaty socks crave redemption—spin them into fresh-smelling warriors of cleanliness! 🧼💪
+
+Room: Bathroom
+Furniture: Mirror
+Task: Polish
+Output: Polish that mirror until it gasps and says, “Is that a Greek god in my reflection?” 😎🪞
+
+Room: Living room
+Furniture: Coffee table
+Task: Dust
+Output: Time to evict the dust bunnies squatting on the coffee table—show no mercy! 🧹🐰
+
 OUTPUT:
 The corrected description.
 '''
@@ -105,8 +129,9 @@ check_description = PromptTemplate.from_template(
 '''Check the following description:
 
 INPUT:
-{target}
 Room: {room}
+Frequency: {frequency}
+{target}
 Task: {task}
 Description: {description}
 
@@ -123,5 +148,35 @@ If ANY rule is clearly broken → respond with exactly: retry
 
 Important: Respond with **only one word**: pass OR retry
 Do NOT add any other text. Do NOT explain. Do NOT add a newline.
+
+BAD EXAMPLE:
+
+Room: Kitchen
+Furniture: Shelve
+Task: wipe
+Ouptut: "Shelve Monthly wipe Kitchen domain"
+
+GOOD EXAMPLES:
+
+Room: Kitchen
+Appliance: Oven
+Task: Bake chocolate cake
+Output: It’s time to unleash sweet lava magic—ignite the oven and summon the chocolate volcano! 🌋🍫
+
+Room: Kitchen
+Appliance: Washing machine
+Task: Wash gym clothes
+Output: Your sweaty socks crave redemption—spin them into fresh-smelling warriors of cleanliness! 🧼💪
+
+Room: Bathroom
+Furniture: Mirror
+Task: Polish
+Output: Polish that mirror until it gasps and says, “Is that a Greek god in my reflection?” 😎🪞
+
+Room: Living room
+Furniture: Coffee table
+Task: Dust
+Output: Time to evict the dust bunnies squatting on the coffee table—show no mercy! 🧹🐰
+
 '''
 )

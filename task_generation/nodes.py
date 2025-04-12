@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 # Load LLM
 
 llm = ChatOllama(
-    model="llama3.2:1b",
+    model="llama3.2:latest",
     configurable_fields=("temperature","seed"),
     base_url="host.docker.internal:11434",
 )
@@ -51,6 +51,7 @@ def task_generation(state : TaskState):
     target = random_key(home[kind])
     method = random_key(home[kind][target]["tasks"])["method"]
     room = home[kind][target]["room"]
+    frequency = random_key(home[kind][target]["tasks"])["frequency"]
 
     return {
         "trys": 0,
@@ -59,7 +60,8 @@ def task_generation(state : TaskState):
         "kind":kind,
         "target":target,
         "method": method,
-        "room": room
+        "room": room,
+        "frequency" : frequency
     }
 
 def description_generation(state : TaskState):
@@ -69,6 +71,7 @@ def description_generation(state : TaskState):
         "room": state['target'],
         "target": state['kind'].capitalize() + ": " + state['target'],
         "task": state["method"],
+        "frequency": state["frequency"]
     })
 
     state["description"] = llm.with_config({
@@ -86,7 +89,9 @@ def repair(state : TaskState):
     prompt = repair_task_description.invoke({
         "room": state['target'],
         "target": state['kind'].capitalize() + ": " + state['target'],
+        "description": state["description"],
         "task": state["method"],
+        "frequency": state["frequency"]
     })
 
     state["description"] = llm.invoke(prompt).content.rstrip()
@@ -107,8 +112,8 @@ def storage(state : TaskState):
             "kind" : state["kind"],
             "room": state['target'],
             "surface": state["surface"] if "surface" in state else "",
-            "task": state["method"]
-
+            "task": state["method"],
+            "frequency": state["frequency"]
         }],
         ids=[state["uuid"]],
     )
@@ -129,7 +134,8 @@ def quality_check(state : TaskState):
         "description": state["description"],
         "target": state['kind'].capitalize() + ": " + state['target'],
         "room" : state["room"],
-        "task": state["method"]
+        "task": state["method"],
+        "frequency": state["frequency"]
     })
 
     result = llm.invoke(prompt).content.casefold().rstrip()

@@ -22,3 +22,4 @@ class TaskState(TypedDict):
     success: bool
     collection: Collection
     uuid: str
+    frequency : str
