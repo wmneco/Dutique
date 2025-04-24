@@ -1,43 +1,67 @@
 home:
-  rooms:
-    Living:
-      surfaces:
-        shelving_unit:
-          methods:
-            - "wipe"
-            - "wet wipe"
-        bed:
-          methods:
-            - "make"
-            - "wipe"
-        desk:
-          methods:
-            - "wipe"
-            - "wet wipe"
-            - "tidy up"
-    Kitchen:
-      surfaces:
-        cupboard:
-            methods:
-              - "tidy up"
-              - "wet wipe"
-        table:
-            methods:
-              - "tidy up"
-              - "wet wipe"
+  furniture:
+    Shelve:
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "monthly"
+      room: "Living"
+    bed:
+      tasks:
+        - method: "make"
+          frequency: "daily"
+        - method: "wipe"
+          frequency: "weekly"
+      room: "Living"
+    desk:
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "monthly"
+        - method: "tidy up"
+          frequency: "daily"
+      room: "Living"
+    cupboard:
+      tasks:
+        - method: "tidy up"
+          frequency: "weekly"
+        - method: "wet wipe"
+          frequency: "weekly"
+      room: "Kitchen"
+    table:
+      tasks:
+        - method: "tidy up"
+          frequency: "daily"
+        - method: "wet wipe"
+          frequency: "daily"
+      room: "Kitchen"
+
   appliances:
     Refrigerator:
-      methods:
-        - "wet wipe"
-        - "tidy up"
-        - "sort"
+      tasks:
+        - method: "wet wipe"
+          frequency: "weekly"
+        - method: "tidy up"
+          frequency: "weekly"
+        - method: "sort"
+          frequency: "weekly"
+      room: "Kitchen"
     Stove/Oven:
-      methods:
-        - "clean"
+      tasks:
+        - method: "clean"
+          frequency: "weekly"
+      room: "Kitchen"
     Dishwasher:
-      methods:
-        - "refill"
-        - "wash up"
+      tasks:
+        - method: "refill"
+          frequency: "weekly"
+        - method: "wash up"
+          frequency: "after use"
+      room: "Kitchen"
     Microwave:
-      methods:
-        - "wipe"
+      tasks:
+        - method: "wipe"
+          frequency: "weekly"
+      room: "Kitchen"
