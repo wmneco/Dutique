@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run the command to start the app
-ENTRYPOINT ["python", "main.py"]
+ENTRYPOINT ["python", "run.py"]

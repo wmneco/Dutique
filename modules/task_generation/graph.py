@@ -39,13 +39,13 @@ task_graph_builder.add_edge("task_generation", "description_generation")
 task_graph_builder.add_conditional_edges(
     "description_generation",
     quality_check,
-    {"retry": "repair", "pass": "storage", "fail": END},
+    {"retry": "repair", "pass": END, "fail": END},
 )
 
 task_graph_builder.add_conditional_edges(
     "repair",
     quality_check,
-    {"retry": "repair", "pass": "storage", "fail": END},
+    {"retry": "repair", "pass": END, "fail": END},
 )
 
 task_graph_builder.add_edge("description_generation", END)
