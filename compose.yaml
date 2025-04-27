@@ -3,7 +3,6 @@ services:
         build:
            context: .
            dockerfile: Dockerfile
-        entrypoint: python run.py
         extra_hosts:
             - "host.docker.internal:host-gateway"
         # depends_on:
