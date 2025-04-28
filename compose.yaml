@@ -5,15 +5,15 @@ services:
            dockerfile: Dockerfile
         extra_hosts:
             - "host.docker.internal:host-gateway"
-        depends_on:
-            - chromadb
+        # depends_on:
+        #     - chromadb
 
-    chromadb:
-        image: chromadb/chroma
-        ports:
-            - "8000:8000"
-        volumes:
-            - chroma_data:/data
+    # chromadb:
+    #     image: chromadb/chroma
+    #     ports:
+    #         - "8000:8000"
+    #     volumes:
+    #         - chroma_data:/data
 
 volumes:
   chroma_data:
