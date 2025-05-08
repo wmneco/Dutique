@@ -4,6 +4,7 @@
 
 import asyncio
 import logging
+import yaml
 
 from core.base_module import BaseModule
 from core.log import LogFormatter
@@ -17,6 +18,8 @@ class Engine:
         self.modules: list[BaseModule] = []
         self.module_names = set()
         self.state = {}
+        self.config = {}
+
         self.loglevel = logging.DEBUG
 
         self.logger = logging.getLogger(__name__)
@@ -26,6 +29,22 @@ class Engine:
         self.logging_stream.setLevel(self.loglevel)
         self.logging_stream.setFormatter(LogFormatter())
 
+    def load_config(self):
+        """Load config for the engine and modules. Run this after all modules are registered"""
+        config = {}
+
+        try:
+            with open("config.yaml", 'r', encoding="UTF-8") as file:
+                config = yaml.safe_load(file)
+        except OSError:
+            self.logger.critical("Could not load config.yaml")
+
+        # Load config for engine
+        self.config = config.get("engine", {})
+
+        # Load config for modules
+        for module in self.modules:
+            module.config = config.get(module.name, {})
 
     def register_module(self, module: BaseModule):
         """Register a module"""
@@ -68,4 +87,5 @@ class Engine:
 
     def run(self):
         """Public API: single entry point"""
+        self.load_config()
         asyncio.run(self._run_all())

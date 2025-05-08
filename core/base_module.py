@@ -13,6 +13,7 @@ class BaseModule(ABC):
     name = "unnamed"
     depends_on = []
     optional_depends_on = []
+    config = {}
 
     def __init__(self):
         self._available_modules = set()
