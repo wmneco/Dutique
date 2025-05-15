@@ -24,7 +24,7 @@ class TaskGenerationModule(BaseModule):
 
     async def update(self, state):
         """Update the module's internal state based on the provided state."""
-        task = await task_graph.ainvoke({
-            "home": self.config,
-        })
-        state["tasks_quene"].append(task)
+        # task = await task_graph.ainvoke({
+        #     "home": self.config,
+        # })
+        # state["tasks_quene"].append(task)

@@ -59,7 +59,8 @@ class Engine:
 
         self.modules.append(module)
         self.module_names.add(name)
-        logger = logging.getLogger("modules."+name)
+
+        logger = logging.getLogger(name)
         logger.setLevel(self.loglevel)
         logger.addHandler(self.logging_stream)
 
@@ -81,7 +82,10 @@ class Engine:
         while True:
             try:
                 await module.update(self.state)
-            except Exception as e:
+            # This is intentionally a general error catcher.
+            # The engine should not crash just because one module does!
+            #TODO: Disable or notify effected modules of the crash, for this intervall
+            except Exception as e: # pylint: disable=W0718
                 self.logger.error("error in %s", module.name, exc_info=e)
             await asyncio.sleep(getattr(module, "tick_interval", 1))
 

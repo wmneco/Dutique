@@ -3,7 +3,7 @@
 # Imports
 
 from core.engine import Engine
-from modules.task_generation import TaskGenerationModule
+from modules.task_managment import TaskManagementModule
 
 
 ###############################################################################
@@ -11,5 +11,6 @@ from modules.task_generation import TaskGenerationModule
 
 if __name__ == "__main__":
     engine = Engine()
-    engine.register_module(TaskGenerationModule())
+    #engine.register_module(TaskGenerationModule())
+    engine.register_module(TaskManagementModule())
     engine.run()

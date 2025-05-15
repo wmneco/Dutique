@@ -3,6 +3,7 @@
 # Imports
 
 from abc import ABC, abstractmethod
+import logging
 
 
 ###############################################################################
@@ -14,9 +15,11 @@ class BaseModule(ABC):
     depends_on = []
     optional_depends_on = []
     config = {}
+    logger = None
 
     def __init__(self):
         self._available_modules = set()
+        self.logger = logging.getLogger(self.name)
 
     def _check_optional(self, module_name):
         return module_name in self._available_modules
